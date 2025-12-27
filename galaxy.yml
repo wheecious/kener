@@ -1,0 +1,9 @@
+---
+namespace: wheecious
+name: kener
+version: 0.1.0
+readme: README.md
+authors:
+  - wheecious (github.com/wheecious)
+description: Ansible modules for kener.
+tags: kener
