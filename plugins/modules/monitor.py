@@ -347,7 +347,7 @@ def main():
     )
 
     state = module.params['state']
-    payload = build_payload(module.params)
+    payload = build_payload(module)
     if state == 'present':
         existing = make_api_request(module, 'GET', f'/api/monitor?tag={payload["tag"]}')
         if existing:
@@ -366,10 +366,10 @@ def main():
     elif state == "absent":
         existing = make_api_request(module, 'GET', f'/api/monitor?tag={payload["tag"]}')
         if existing:
-            make_api_request(module, 'DELETE', f'/api/monitor/{existing[0]['id']}')
-            module.exit_json(changed=True, msg=f'Monitor {payload['tag']} was removed')
+            make_api_request(module, 'DELETE', f'/api/monitor/{existing[0]["id"]}')
+            module.exit_json(changed=True, msg=f'Monitor {payload["tag"]} was removed')
         else:
-            module.exit_json(changed=False, msg=f'No monitor {payload['tag']} found')
+            module.exit_json(changed=False, msg=f'No monitor {payload["tag"]} found')
 
 if __name__ == '__main__':
     main()

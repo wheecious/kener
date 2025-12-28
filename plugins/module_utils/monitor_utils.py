@@ -8,7 +8,8 @@ required_fields = {
     'DNS': ['lookupRecord', 'nameServer', 'matchType', 'values']
 }
 
-def build_payload(params):
+def build_payload(module):
+    params = module.params
     monitor_type = params['monitor_type']
     payload = {
         'name': params['name'],
@@ -24,8 +25,7 @@ def build_payload(params):
         }
     elif monitor_type in required_fields:
         for field in required_fields[monitor_type]:
-            if params['monitor'].get(field):
-                payload['type_data'] = params['monitor']
-    else:
-        module.fail_json(msg=f'Unsupported monitor type {monitor_type}')
+            if not params['monitor'].get(field):
+                module.fail_json(msg=f'{field} is required for {monitor_type}')
+        payload['type_data'] = params['monitor']
     return payload
