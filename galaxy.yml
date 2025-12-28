@@ -7,6 +7,5 @@ authors:
   - wheecious (github.com/wheecious)
 description: Ansible modules for kener.
 tags: kener
-license:
-  - MIT
+license: MIT
 repository: https://github.com/wheecious/kener
