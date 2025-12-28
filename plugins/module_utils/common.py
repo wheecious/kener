@@ -24,7 +24,7 @@ def make_api_request(module, method, endpoint, data=None):
         module, url, data=body, headers=headers, method=method)
 
     if info['status'] >= 400:
-        module.fail_json(msg=f'API error: {info['status']}')
+        module.fail_json(msg=f'API error: {info["status"]}')
 
     if response:
         return json.loads(response.read())
